@@ -1,11 +1,11 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CreateMessage1661436510152 implements MigrationInterface {
+export class CreateSession1661449873973 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: 'message',
+              name: 'sessions',
               columns: [
                 {
                   name: 'id',
@@ -14,12 +14,10 @@ export class CreateMessage1661436510152 implements MigrationInterface {
                   isPrimary: true,
                 },
                 {
-                  name: 'message',
-                  type: 'varchar',
-                },
-                {
                   name: 'userId',
-                  type: 'varchar',
+                  type: 'char',
+                  length: '64',
+                  isNullable: true,
                 },
                 {
                   name: 'createdAt',
@@ -32,13 +30,13 @@ export class CreateMessage1661436510152 implements MigrationInterface {
                   type: "timestamp",
                   isNullable: true,
                 },
-              ],
+              ]
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('message')
+        await queryRunner.dropTable('sessions')
     }
 
 }
