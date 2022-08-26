@@ -6,6 +6,7 @@ class Session {
     static async retrieve({ userId }) {
         const indexSessionUseCases = container.resolve(IndexSessionUseCases)
         const createSessionUseCases = container.resolve(CreateSessionUseCases)
+
         const session = await indexSessionUseCases.execute({
             userId
         })

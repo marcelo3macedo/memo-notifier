@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CreateSession1661449873973 implements MigrationInterface {
+export class CreateIterationOption1661513822687 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: 'session',
+              name: 'iteration_option',
               columns: [
                 {
                   name: 'id',
@@ -14,10 +14,21 @@ export class CreateSession1661449873973 implements MigrationInterface {
                   isPrimary: true,
                 },
                 {
-                  name: 'userId',
+                  name: 'iterationId',
                   type: 'char',
                   length: '64',
-                  isNullable: true,
+                },
+                {
+                    name: 'slug',
+                    type: 'varchar',
+                },
+                {
+                    name: 'content',
+                    type: 'varchar',
+                },
+                {
+                    name: 'position',
+                    type: 'integer',
                 },
                 {
                   name: 'createdAt',
@@ -33,10 +44,19 @@ export class CreateSession1661449873973 implements MigrationInterface {
               ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            'iteration_option',
+            new TableForeignKey({
+              columnNames: ['iterationId'],
+              referencedTableName: 'iteration',
+              referencedColumnNames: ['id']
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('session')
+        await queryRunner.dropTable('iteration_option')
     }
 
 }

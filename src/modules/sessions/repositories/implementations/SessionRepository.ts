@@ -15,8 +15,9 @@ export class SessionRepository implements ISessionRepository {
 
     async index({ userId }:IIndexSessionDTO): Promise<Session> {
         return this.repository.createQueryBuilder('sessions')
-           .where({ userId })
-           .getOne()
+            .leftJoinAndSelect("sessions.iterations", "iterations")
+            .where({ userId })
+            .getOne()
     }
 
     async create({ userId }:ICreateSessionDTO): Promise<void> {
