@@ -12,10 +12,8 @@ export default class HandleMessageUseCases {
         const channel = Channel.getChannelByType(channelType)
         const message = channel.receive(requestData)
         const user = await User.retrieve({ channelType, userId: message.userId })
-        const session = await Session.retrieve({ userId: message.userId })
+        const session = await Session.retrieve({ userId: user.id })
 
-        await Message.save(message)
-        
-        
+        await Message.save(message)        
    }
 }
