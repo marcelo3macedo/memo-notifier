@@ -8,8 +8,11 @@ import { SessionRepository } from '@modules/sessions/repositories/implementation
 import ISessionRepository from '@modules/sessions/repositories/ISessionRepository';
 import IUserAPIRepository from '@modules/users/repositories/IUserAPIRepository';
 import UserAPIRepository from '@modules/users/repositories/implementations/UserAPIRepository';
+import ISessionAPIRepository from '@modules/sessions/repositories/ISessionAPIRepository';
+import { SessionAPIRepository } from '@modules/sessions/repositories/implementations/SessionAPIRepository';
 
 container.registerSingleton<IMessageRepository>('MessageRepository', MessageRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IUserAPIRepository>('UserAPIRepository', UserAPIRepository);
 container.registerSingleton<ISessionRepository>('SessionRepository', SessionRepository);
+container.registerSingleton<ISessionAPIRepository>('SessionAPIRepository', SessionAPIRepository);
