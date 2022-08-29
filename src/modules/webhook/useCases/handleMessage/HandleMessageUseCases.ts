@@ -5,6 +5,7 @@ import Channel from "lib/processors/channel";
 import Message from "@lib/processors/message";
 import User from "@lib/processors/user";
 import Session from "@lib/processors/session";
+import Iteration from "@lib/processors/iteration";
 
 @injectable()
 export default class HandleMessageUseCases {
@@ -14,6 +15,7 @@ export default class HandleMessageUseCases {
         const user = await User.retrieve({ channelType, userId: message.userId })
         const session = await Session.retrieve({ userId: user.id })
 
-        await Message.save(message)        
+        await Message.save(message)
+        await Iteration.handle({ session, user, message: message.content })
    }
 }

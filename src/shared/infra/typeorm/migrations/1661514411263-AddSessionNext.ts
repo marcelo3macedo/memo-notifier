@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, TableColumn, TableForeignKey} from "typeorm";
+import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
 
 export class AddSessionNext1661514411263 implements MigrationInterface {
 
