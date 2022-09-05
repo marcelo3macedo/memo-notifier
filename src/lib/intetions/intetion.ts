@@ -8,4 +8,8 @@ export class Intetion {
     process({ message }) {
         return
     }
+
+    makeMessage() {
+        return
+    }
 }
