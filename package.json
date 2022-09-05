@@ -8,7 +8,7 @@
     "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli"    
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-typescript": "^7.16.7",
     "amqplib": "^0.8.0",
+    "axios": "^0.27.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "config": "^3.3.6",

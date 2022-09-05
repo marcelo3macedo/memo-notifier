@@ -1,4 +1,5 @@
 import { container } from 'tsyringe';
+import './providers';
 
 import IMessageRepository from '@modules/messages/repositories/IMessageRepository';
 import MessageRepository from '@modules/messages/repositories/implementations/MessageRepository';
