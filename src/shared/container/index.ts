@@ -11,9 +11,12 @@ import IUserAPIRepository from '@modules/users/repositories/IUserAPIRepository';
 import UserAPIRepository from '@modules/users/repositories/implementations/UserAPIRepository';
 import ISessionAPIRepository from '@modules/sessions/repositories/ISessionAPIRepository';
 import { SessionAPIRepository } from '@modules/sessions/repositories/implementations/SessionAPIRepository';
+import { IterationRepository } from '@modules/iterations/repositories/implementations/IterationRepository';
+import IIterationRepository from '@modules/iterations/repositories/IIterationRepository';
 
 container.registerSingleton<IMessageRepository>('MessageRepository', MessageRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IUserAPIRepository>('UserAPIRepository', UserAPIRepository);
 container.registerSingleton<ISessionRepository>('SessionRepository', SessionRepository);
 container.registerSingleton<ISessionAPIRepository>('SessionAPIRepository', SessionAPIRepository);
+container.registerSingleton<IIterationRepository>('IterationRepository', IterationRepository);
