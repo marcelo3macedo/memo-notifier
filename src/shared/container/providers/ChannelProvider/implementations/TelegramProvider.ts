@@ -1,8 +1,24 @@
 import helper from "@config/helper";
+import IMessageDTO from "@modules/messages/dtos/IMessageDTO";
 import axios from "axios";
 import { IChannelProvider } from "../IChannelProvider";
 
 class TelegramProvider implements IChannelProvider {
+    receive(data): IMessageDTO {
+        const { message } = data || {}
+        const { chat } = message || {}
+
+        if (!message || !chat) {
+            return
+        }
+
+        return {
+            messageId: message.message_id,
+            content: message.text,
+            userId: chat.id
+        }
+    }
+    
     async send({ userId, messages }) {
         if (!messages) {
             return
