@@ -6,6 +6,8 @@ import Messenger from "@lib/messenger";
 import SessionProcessor from "@lib/processors/sessionProcessor";
 import { SESSIONTYPE_FINISHED, SESSIONTYPE_QUESTION_WELCOME } from "@constants/sessionType";
 import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
+import { ITERATION_MENU } from "@constants/iteration";
+import messenger from "@constants/messenger";
 
 class WelcomeProvider implements IIntetionProvider {
     async process({ user, session, messages }): Promise<IIterationDTO> {
@@ -48,8 +50,8 @@ class WelcomeProvider implements IIntetionProvider {
                 { key: 'sessionName', value: sessionsAPI[0].deck.name }
             ])
             let options = [
-                { slug: 'yes', content: sessionsAPI[0].id },
-                { slug: 'no', content: '[memo_menu]' }
+                { slug: sessionsAPI[0].id, content: messenger.default.options.yes },
+                { slug: ITERATION_MENU, content: messenger.default.options.no  }
             ]
 
             await SessionProcessor.update({ 

@@ -15,9 +15,9 @@ class ChannelProcessor {
         return channel.receive(requestData)
     }
 
-    sendMessage({ channelType, key, messages }) {
+    sendMessage({ channelType, key, messages, options }) {
         const channel = this.getChannelByType(channelType)
-        channel.send({ userId: key, messages })
+        channel.send({ userId: key, messages, options })
     }
 
     getChannelByType(type) {

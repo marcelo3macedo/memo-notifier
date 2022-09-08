@@ -19,25 +19,44 @@ class TelegramProvider implements IChannelProvider {
         }
     }
     
-    async send({ userId, messages }) {
+    async send({ userId, messages, options }) {
         if (!messages) {
             return
         }
 
-        const options = {
+        const optRequest = {
             method: 'POST',
             url: helper.telegram.endpointWithToken,
             headers: {'Content-Type': 'application/json'},
-            data: { chat_id: userId, text: this.formatMessages(messages) }
+            data: { 
+                chat_id: userId, 
+                text: this.formatMessages(messages),
+                reply_markup: this.formatOptions(options)
+            }
         }
 
-        await axios.request(options)
+        await axios.request(optRequest)
     }
 
     formatMessages(messages) {
         return messages.reduce((p, a) => {
-            return (p ? p + '\n\n' : p) + a.content
+            return (p ? p + '\n\n' : p) + a
         }, '')
+    }
+
+    formatOptions(options) {
+        const result = options.map(o => {
+            return {
+                text: o.content,
+                callback_data: o.slug
+            }
+        })
+
+        return {
+            inline_keyboard: [
+                result
+            ]
+        }
     }
 }
 

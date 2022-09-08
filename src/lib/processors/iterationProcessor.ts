@@ -23,15 +23,17 @@ class IterationProcessor {
         if (!intetion) {
             return
         }
-
-        const messages = await intetion.process({ user, session, message })        
+        
+        const { messages, options } = await intetion.process({ user, session, message }) || {}   
         return {
             key: user.key,
-            messages
+            messages,
+            options
         }
     }
 
     getIntetion({ session, message }) {
+        return this.welcomeProvider;
         const iteration = Iteration.getProvider({ session, message})
         switch (iteration) {
             case ITERATION_WELCOME: return this.welcomeProvider;

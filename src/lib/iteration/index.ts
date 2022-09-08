@@ -8,7 +8,7 @@ class Iteration {
       return reservedKeyword
     }
 
-    if (!session || session.iterations.length == 0) {
+    if (!session || !session.iterations || session.iterations.length == 0) {
       return ITERATION_WELCOME
     }
 
