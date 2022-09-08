@@ -26,6 +26,8 @@ class IterationProcessor {
         if (!session || session.iterations.length == 0) {
             return this.welcomeProvider
         }
+
+        return this.welcomeProvider
     }
 }
 

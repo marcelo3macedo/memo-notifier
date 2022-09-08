@@ -1,8 +1,8 @@
-import IMessageDTO from "@modules/messages/dtos/IMessageDTO";
+import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
 
 interface IIntetionProvider {
-    process(data:any):void
-    makeMessage(userId):IMessageDTO[]
+    process(data:any):Promise<IIterationDTO>
+    makeMessage(userId):Promise<IIterationDTO>
 }
 
 export { IIntetionProvider };

@@ -1,14 +1,14 @@
 import { container } from "tsyringe";
 import { IIntetionProvider } from "../IIntetionProvider";
-import IMessageDTO from "@modules/messages/dtos/IMessageDTO";
 import IndexUserAPIUseCases from "@modules/users/useCases/indexUserAPI/IndexUserAPIUseCases";
 import ListSessionAPIUseCases from "@modules/sessions/useCases/listSessionAPI/ListSessionAPIUseCases";
 import Messenger from "@lib/messenger";
 import SessionProcessor from "@lib/processors/sessionProcessor";
-import { SESSIONTYPE_FINISHED } from "@constants/sessionType";
+import { SESSIONTYPE_FINISHED, SESSIONTYPE_QUESTION } from "@constants/sessionType";
+import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
 
 class WelcomeProvider implements IIntetionProvider {
-    async process({ user, session, messages }) {
+    async process({ user, session, messages }): Promise<IIterationDTO> {
         const id = '074a1691-672c-41d9-a573-a518219ad159'
         const indexUserAPIUseCases = container.resolve(IndexUserAPIUseCases)
         const listSessionAPIUseCases = container.resolve(ListSessionAPIUseCases)
@@ -19,6 +19,7 @@ class WelcomeProvider implements IIntetionProvider {
             userId: userAPI.id
         })
 
+
         return this.makeMessage({
             user: userAPI,
             session,
@@ -27,15 +28,43 @@ class WelcomeProvider implements IIntetionProvider {
         })
     }
     
-    makeMessage({ user, session, sessionsAPI, messages }): IMessageDTO[] {
-        //if (!sessionsAPI || sessionsAPI.length == 0) {
+    async makeMessage({ user, session, sessionsAPI, messages }): Promise<IIterationDTO> {
+        if (!sessionsAPI || sessionsAPI.length == 0) {
             const no_session = Messenger.getValue('welcome.no_session', [ { key: 'user', value: user.name } ])
-            SessionProcessor.update({ session, type: SESSIONTYPE_FINISHED, messages: [ no_session ] })
+            await SessionProcessor.update({ 
+                session, 
+                type: SESSIONTYPE_FINISHED, 
+                messages: [ no_session ] 
+            })
 
-            return [
-                no_session
+            return {
+                options: null,
+                messages: [ no_session ]
+            }
+        }
+
+        if (sessionsAPI.length == 1) {
+            const sessionMessage = Messenger.getValue('welcome.session_open', [ 
+                { key: 'user', value: user.name },
+                { key: 'sessionName', value: session.name }
+            ])
+            let options = [
+                { slug: 'yes', content: sessionsAPI[0].id },
+                { slug: 'no', content: '[memo_menu]' }
             ]
-        //}
+
+            await SessionProcessor.update({ 
+                session, 
+                type: SESSIONTYPE_QUESTION, 
+                messages: [ sessionMessage ],
+                options
+            })
+
+            return {
+                options,
+                messages: [ sessionMessage ]
+            }
+        }
 
         // if session = 1 -> message -> Sim/Não
         // if session > 1 -> message -> Options
