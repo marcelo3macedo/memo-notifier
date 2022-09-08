@@ -4,6 +4,7 @@ import CreateIterationOptionUseCases from "@modules/iterations/useCases/createIt
 import CreateSessionUseCases from "@modules/sessions/useCases/createSession/CreateSessionUseCases";
 import IndexSessionUseCases from "@modules/sessions/useCases/indexSession/IndexSessionUseCases";
 import RemoveSessionUseCases from "@modules/sessions/useCases/removeSession/RemoveSessionUseCases";
+import UpdateSessionUseCases from "@modules/sessions/useCases/updateSession/UpdateSessionUseCases";
 import { container } from "tsyringe";
 
 class SessionProcessor {
@@ -19,17 +20,14 @@ class SessionProcessor {
             return session
         }
 
-        await createSessionUseCases.execute({ userId })
-
-        return indexSessionUseCases.execute({
-            userId
-        })
+        return createSessionUseCases.execute({ userId })
     }
 
     static async update({ session, type, messages, options=[] }) {
         let iteration;
         const createIterationUseCases = container.resolve(CreateIterationUseCases)
         const removeSessionUseCases = container.resolve(RemoveSessionUseCases)
+        const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
         const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
         
         await Promise.all(messages.map(async (m, i) => {
@@ -52,6 +50,8 @@ class SessionProcessor {
 
         if (type === SESSIONTYPE_FINISHED) {
             await removeSessionUseCases.execute({ id: session.id })
+        } else {
+            await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })
         }
     }
 }
