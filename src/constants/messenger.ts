@@ -12,6 +12,10 @@ export default {
         keywords: {
             menu: 'menu,menu principal,recomeçar,inicio',
             sair: 'sair,encerrar,fechar'
+        },
+        options: {
+            yes: "Sim",
+            no: "Não"
         }
     }
 };
