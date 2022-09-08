@@ -1,4 +1,6 @@
+import { SESSIONTYPE_FINISHED } from "@constants/sessionType";
 import CreateIterationUseCases from "@modules/iterations/useCases/createIteration/CreateIterationUseCases";
+import CreateIterationOptionUseCases from "@modules/iterations/useCases/createIterationOption/CreateIterationOptionUseCases";
 import CreateSessionUseCases from "@modules/sessions/useCases/createSession/CreateSessionUseCases";
 import IndexSessionUseCases from "@modules/sessions/useCases/indexSession/IndexSessionUseCases";
 import RemoveSessionUseCases from "@modules/sessions/useCases/removeSession/RemoveSessionUseCases";
@@ -24,20 +26,33 @@ class SessionProcessor {
         })
     }
 
-    static async update({ session, type, messages }) {
+    static async update({ session, type, messages, options=[] }) {
+        let iteration;
         const createIterationUseCases = container.resolve(CreateIterationUseCases)
         const removeSessionUseCases = container.resolve(RemoveSessionUseCases)
-
-        messages.map(async (m, i) => {
-            await createIterationUseCases.execute({ 
+        const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
+        
+        await Promise.all(messages.map(async (m, i) => {
+            iteration = await createIterationUseCases.execute({ 
                 sessionId: session.id,
                 content: m,
                 position: i,
                 type   
             })
+        }))
+
+        options.forEach(async (o, i) => {
+            await createIterationOptionUseCases.execute({
+                content: o.content,
+                slug: o.slug,
+                iterationId: iteration.id,
+                position: i
+            })
         })
 
-        await removeSessionUseCases.execute({ id: session.id })
+        if (type === SESSIONTYPE_FINISHED) {
+            await removeSessionUseCases.execute({ id: session.id })
+        }
     }
 }
 
