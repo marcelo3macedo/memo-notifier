@@ -5,6 +5,7 @@ import ICreateSessionDTO from "@modules/sessions/dtos/ICreateSessionDTO";
 import IIndexSessionDTO from "@modules/sessions/dtos/IIndexSessionDTO";
 import IRemoveSessionDTO from "@modules/sessions/dtos/IRemoveSessionDTO";
 import ISessionRepository from "@modules/sessions/repositories/ISessionRepository";
+import IUpdateSessionDTO from "@modules/sessions/dtos/IUpdateSessionDTO";
 
 export class SessionRepository implements ISessionRepository {
     private repository: Repository<Session>;
@@ -20,15 +21,24 @@ export class SessionRepository implements ISessionRepository {
             .getOne()
     }
 
-    async create({ userId }:ICreateSessionDTO): Promise<void> {
+    async create({ userId }:ICreateSessionDTO): Promise<Session> {
         const sessionCreated = this.repository.create({
             userId
         })
     
-        await this.repository.save(sessionCreated);
+        await this.repository.save(sessionCreated)
+        return sessionCreated
     }
 
     async remove({ id }:IRemoveSessionDTO): Promise<void> {
         await this.repository.softDelete(id);
+    }
+
+    async update({ id, nextId }:IUpdateSessionDTO): Promise<void> {
+        const session = {
+            nextId
+        }
+     
+        this.repository.update({ id }, session)
     }
 }

@@ -1,8 +1,12 @@
 import messenger from "@constants/messenger"
 
 class Messenger {
-    static getValue(key, variables) {
+    static getValue(key, variables=null) {
         let value = this.getObjectProperty(messenger.default, key)
+        if (!variables) {
+          return value
+        }
+        
         variables.forEach(v => {
             let re = new RegExp(`{{${v.key}}}`,"gi");
             value = value.replace(re, v.value) 

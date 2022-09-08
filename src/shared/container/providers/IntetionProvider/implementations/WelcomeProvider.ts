@@ -4,7 +4,7 @@ import IndexUserAPIUseCases from "@modules/users/useCases/indexUserAPI/IndexUser
 import ListSessionAPIUseCases from "@modules/sessions/useCases/listSessionAPI/ListSessionAPIUseCases";
 import Messenger from "@lib/messenger";
 import SessionProcessor from "@lib/processors/sessionProcessor";
-import { SESSIONTYPE_FINISHED, SESSIONTYPE_QUESTION } from "@constants/sessionType";
+import { SESSIONTYPE_FINISHED, SESSIONTYPE_QUESTION_WELCOME } from "@constants/sessionType";
 import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
 
 class WelcomeProvider implements IIntetionProvider {
@@ -38,7 +38,6 @@ class WelcomeProvider implements IIntetionProvider {
             })
 
             return {
-                options: null,
                 messages: [ no_session ]
             }
         }
@@ -46,7 +45,7 @@ class WelcomeProvider implements IIntetionProvider {
         if (sessionsAPI.length == 1) {
             const sessionMessage = Messenger.getValue('welcome.session_open', [ 
                 { key: 'user', value: user.name },
-                { key: 'sessionName', value: session.name }
+                { key: 'sessionName', value: sessionsAPI[0].deck.name }
             ])
             let options = [
                 { slug: 'yes', content: sessionsAPI[0].id },
@@ -55,7 +54,7 @@ class WelcomeProvider implements IIntetionProvider {
 
             await SessionProcessor.update({ 
                 session, 
-                type: SESSIONTYPE_QUESTION, 
+                type: SESSIONTYPE_QUESTION_WELCOME, 
                 messages: [ sessionMessage ],
                 options
             })

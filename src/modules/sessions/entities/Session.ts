@@ -1,5 +1,5 @@
 import { Iteration } from '@modules/iterations/entities/Iteration';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 import { v4 as uuid } from "uuid";
 
 @Entity()
@@ -12,6 +12,9 @@ export class Session {
 
    @OneToMany(() => Iteration, (iteration: Iteration) => iteration.session)
    iterations: Iteration[];
+
+   @Column()
+   nextId: string;
   
    @CreateDateColumn()
    createdAt: Date;
