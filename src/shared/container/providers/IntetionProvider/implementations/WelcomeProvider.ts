@@ -10,7 +10,7 @@ import { ITERATION_MENU } from "@constants/iteration";
 import messenger from "@constants/messenger";
 
 class WelcomeProvider implements IIntetionProvider {
-    async process({ user, session, messages }): Promise<IIterationDTO> {
+    async process({ user, session }): Promise<IIterationDTO> {
         const id = '074a1691-672c-41d9-a573-a518219ad159'
         const indexUserAPIUseCases = container.resolve(IndexUserAPIUseCases)
         const listSessionAPIUseCases = container.resolve(ListSessionAPIUseCases)
@@ -25,12 +25,11 @@ class WelcomeProvider implements IIntetionProvider {
         return this.makeMessage({
             user: userAPI,
             session,
-            sessionsAPI: sessionsAPI,
-            messages
+            sessionsAPI: sessionsAPI
         })
     }
     
-    async makeMessage({ user, session, sessionsAPI, messages }): Promise<IIterationDTO> {
+    async makeMessage({ user, session, sessionsAPI }): Promise<IIterationDTO> {
         if (!sessionsAPI || sessionsAPI.length == 0) {
             const no_session = Messenger.getValue('welcome.no_session', [ { key: 'user', value: user.name } ])
             await SessionProcessor.update({ 

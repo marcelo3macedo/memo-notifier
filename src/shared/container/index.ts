@@ -15,6 +15,8 @@ import { IterationRepository } from '@modules/iterations/repositories/implementa
 import IIterationRepository from '@modules/iterations/repositories/IIterationRepository';
 import { IterationOptionRepository } from '@modules/iterations/repositories/implementations/IterationOptionRepository';
 import IIterationOptionRepository from '@modules/iterations/repositories/IIterationOptionRepository';
+import { DifficultiesAPIRepository } from '@modules/difficulties/repositories/implementations/DifficultiesAPIRepository';
+import { IDifficultiesAPIRepository } from '@modules/difficulties/repositories/IDifficultiesAPIRepository';
 
 container.registerSingleton<IMessageRepository>('MessageRepository', MessageRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
@@ -23,3 +25,4 @@ container.registerSingleton<ISessionRepository>('SessionRepository', SessionRepo
 container.registerSingleton<ISessionAPIRepository>('SessionAPIRepository', SessionAPIRepository);
 container.registerSingleton<IIterationRepository>('IterationRepository', IterationRepository);
 container.registerSingleton<IIterationOptionRepository>('IterationOptionRepository', IterationOptionRepository);
+container.registerSingleton<IDifficultiesAPIRepository>('DifficultiesAPIRepository', DifficultiesAPIRepository);

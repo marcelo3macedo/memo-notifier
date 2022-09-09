@@ -1,6 +1,7 @@
 import { DeckAPI } from '@modules/decks/entities/DeckAPI';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, JoinColumn, OneToOne, ManyToMany, JoinTable } from 'typeorm';
 import { v4 as uuid } from "uuid";
+import Card from './CardAPI';
 
 @Entity({ name: "sessions" })
 export class SessionAPI {
@@ -16,6 +17,10 @@ export class SessionAPI {
    @OneToOne(() => DeckAPI)
    @JoinColumn()
    deck: DeckAPI;
+
+   @ManyToMany(() => Card, { cascade: true })
+   @JoinTable()
+   cards: Card[];
   
    @CreateDateColumn()
    createdAt: Date;
