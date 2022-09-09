@@ -45,6 +45,10 @@ class TelegramProvider implements IChannelProvider {
     }
 
     formatOptions(options) {
+        if (!options) {
+            return
+        }
+        
         const result = options.map(o => {
             return {
                 text: o.content,

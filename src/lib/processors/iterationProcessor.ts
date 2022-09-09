@@ -33,7 +33,6 @@ class IterationProcessor {
     }
 
     getIntetion({ session, message }) {
-        return this.welcomeProvider;
         const iteration = Iteration.getProvider({ session, message})
         switch (iteration) {
             case ITERATION_WELCOME: return this.welcomeProvider;

@@ -54,6 +54,35 @@ class SessionProcessor {
             await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })
         }
     }
+
+    static async updateOptions({ session, type, messages, options=[] }) {
+        let iteration, firstIteration;
+        const createIterationUseCases = container.resolve(CreateIterationUseCases)
+        const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
+        const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
+        
+        await Promise.all(messages.map(async (m, i) => {
+            iteration = await createIterationUseCases.execute({ 
+                sessionId: session.id,
+                content: m,
+                position: i,
+                type   
+            })
+
+            if (!firstIteration) firstIteration = iteration
+
+            options.forEach(async (o, i) => {
+                await createIterationOptionUseCases.execute({
+                    content: o.content,
+                    slug: o.slug,
+                    iterationId: iteration.id,
+                    position: i
+                })
+            })
+        }))
+
+        await updateSessionUseCases.execute({ id: session.id, nextId: firstIteration.id })
+    }
 }
 
 export default SessionProcessor

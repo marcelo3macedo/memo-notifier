@@ -16,6 +16,10 @@ export default {
         options: {
             yes: "Sim",
             no: "Não"
+        },
+        error: {
+            invalidMessage: "Resposta inválida.",
+            sessionNotFound: "Sessão não encontrada"
         }
     }
 };
