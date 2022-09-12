@@ -11,6 +11,9 @@ export class Iteration {
     sessionId: string;
 
     @Column()
+    cardId: string;
+
+    @Column()
     type: string;
 
     @Column()

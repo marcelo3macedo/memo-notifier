@@ -10,9 +10,9 @@ export class IterationRepository implements IIterationRepository {
         this.repository = getRepository(Iteration);
     }
 
-    async create({ sessionId, content, position, type }:ICreateIterationDTO): Promise<Iteration> {
+    async create({ sessionId, cardId, content, position, type }:ICreateIterationDTO): Promise<Iteration> {
         const iterationCreated = this.repository.create({
-            sessionId, content, position, type
+            sessionId, cardId, content, position, type
         })
     
         await this.repository.save(iterationCreated)

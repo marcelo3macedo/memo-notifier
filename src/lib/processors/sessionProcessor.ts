@@ -34,6 +34,7 @@ class SessionProcessor {
             iteration = await createIterationUseCases.execute({ 
                 sessionId: session.id,
                 content: m,
+                cardId: null,
                 position: i,
                 type   
             })
@@ -64,7 +65,8 @@ class SessionProcessor {
         await Promise.all(messages.map(async (m, i) => {
             iteration = await createIterationUseCases.execute({ 
                 sessionId: session.id,
-                content: m,
+                cardId: m.cardId,
+                content: m.message,
                 position: i,
                 type   
             })
@@ -82,6 +84,11 @@ class SessionProcessor {
         }))
 
         await updateSessionUseCases.execute({ id: session.id, nextId: firstIteration.id })
+    }
+
+    static async updateIteration({ session, iteration }) {
+        const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
+        await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })
     }
 }
 

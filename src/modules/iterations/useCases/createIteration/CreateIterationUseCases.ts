@@ -11,7 +11,7 @@ export default class CreateIterationUseCases {
         private iterationRepository: IIterationRepository
     ) {}
 
-    async execute({ sessionId, content, position, type }:ICreateIterationDTO): Promise<Iteration> {
-        return this.iterationRepository.create({ sessionId, content, position, type })
+    async execute({ sessionId, cardId, content, position, type }:ICreateIterationDTO): Promise<Iteration> {
+        return this.iterationRepository.create({ sessionId, cardId, content, position, type })
    }
 }

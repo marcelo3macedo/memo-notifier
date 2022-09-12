@@ -17,12 +17,15 @@ import { IterationOptionRepository } from '@modules/iterations/repositories/impl
 import IIterationOptionRepository from '@modules/iterations/repositories/IIterationOptionRepository';
 import { DifficultiesAPIRepository } from '@modules/difficulties/repositories/implementations/DifficultiesAPIRepository';
 import { IDifficultiesAPIRepository } from '@modules/difficulties/repositories/IDifficultiesAPIRepository';
+import { SessionCardAPIRepository } from '@modules/sessions/repositories/implementations/SessionCardAPIRepository';
+import ISessionCardAPIRepository from '@modules/sessions/repositories/ISessionCardAPIRepository';
 
 container.registerSingleton<IMessageRepository>('MessageRepository', MessageRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IUserAPIRepository>('UserAPIRepository', UserAPIRepository);
 container.registerSingleton<ISessionRepository>('SessionRepository', SessionRepository);
 container.registerSingleton<ISessionAPIRepository>('SessionAPIRepository', SessionAPIRepository);
+container.registerSingleton<ISessionCardAPIRepository>('SessionCardAPIRepository', SessionCardAPIRepository);
 container.registerSingleton<IIterationRepository>('IterationRepository', IterationRepository);
 container.registerSingleton<IIterationOptionRepository>('IterationOptionRepository', IterationOptionRepository);
 container.registerSingleton<IDifficultiesAPIRepository>('DifficultiesAPIRepository', DifficultiesAPIRepository);
