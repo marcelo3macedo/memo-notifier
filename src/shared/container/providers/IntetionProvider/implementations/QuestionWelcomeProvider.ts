@@ -34,7 +34,10 @@ class QuestionWelcomeProvider implements IIntetionProvider {
         const listDifficultiesAPIUseCase = container.resolve(ListDifficultiesAPIUseCase)
         const difficulties = await listDifficultiesAPIUseCase.execute()     
         const messages = sessionAPI.cards.map(c => {
-            return c.content.concat("\n", c.secretContent)
+            return {
+                cardId: c.id,
+                message: c.content.concat("\n", c.secretContent)
+            } 
         })
         const options = difficulties.map(d => {
             return {

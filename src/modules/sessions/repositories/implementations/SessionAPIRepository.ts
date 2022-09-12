@@ -27,4 +27,8 @@ export class SessionAPIRepository implements ISessionAPIRepository {
             .where({ id })
             .getOne()
     }
+
+    async remove({ id }): Promise<void> {
+        this.repository.softDelete({ id });
+    }
 }
