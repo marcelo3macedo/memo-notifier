@@ -1,4 +1,4 @@
-import { ITERATION_EXIT, ITERATION_MENU, ITERATION_QUESTION, ITERATION_QUESTION_WELCOME, ITERATION_WELCOME } from "@constants/iteration"
+import { ITERATION_EXIT, ITERATION_FINISHED, ITERATION_MENU, ITERATION_QUESTION, ITERATION_QUESTION_WELCOME, ITERATION_WELCOME } from "@constants/iteration"
 import Iteration from "@lib/iteration"
 import { IIntetionProvider } from "@shared/container/providers/IntetionProvider/IIntetionProvider"
 import { inject, injectable } from "tsyringe"
@@ -6,7 +6,7 @@ import SessionProcessor from "./sessionProcessor"
 import User from "./user"
 
 @injectable()
-class IterationProcessor {
+class   IterationProcessor {
     constructor(
         @inject("WelcomeProvider")
         private welcomeProvider: IIntetionProvider,
@@ -16,6 +16,8 @@ class IterationProcessor {
         private questionProvider: IIntetionProvider,
         @inject("ExitProvider")
         private exitProvider: IIntetionProvider,
+        @inject("FinishProvider")
+        private finishProvider: IIntetionProvider,
     ) {}
 
     async handle({ channelType, userId, message }) {
@@ -35,13 +37,14 @@ class IterationProcessor {
     }
 
     getIntetion({ session, message }) {
-        const iteration = Iteration.getProvider({ session, message})
+        const iteration = Iteration.getProvider({ session, message })
         switch (iteration) {
             case ITERATION_WELCOME: return this.welcomeProvider;
             case ITERATION_QUESTION_WELCOME: return this.questionWelcomeProvider;
             case ITERATION_MENU: return this.welcomeProvider;
             case ITERATION_EXIT: return this.exitProvider;
             case ITERATION_QUESTION: return this.questionProvider;
+            case ITERATION_FINISHED: return this.finishProvider;
         }        
     }
 }

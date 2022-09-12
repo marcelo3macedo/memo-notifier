@@ -34,9 +34,13 @@ export class SessionRepository implements ISessionRepository {
         await this.repository.softDelete(id);
     }
 
-    async update({ id, nextId }:IUpdateSessionDTO): Promise<void> {
-        const session = {
-            nextId
+    async update({ id, nextId, externalId }:IUpdateSessionDTO): Promise<void> {
+        let session = {
+            nextId            
+        }
+
+        if (externalId) {
+            session['externalId'] = externalId
         }
      
         this.repository.update({ id }, session)

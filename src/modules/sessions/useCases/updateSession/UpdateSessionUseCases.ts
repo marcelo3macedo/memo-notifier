@@ -10,7 +10,7 @@ export default class UpdateSessionUseCases {
         private sessionRepository: ISessionRepository
     ) {}
 
-    async execute({ id, nextId }:IUpdateSessionDTO): Promise<void> {
-        this.sessionRepository.update({ id, nextId })
+    async execute({ id, nextId, externalId }:IUpdateSessionDTO): Promise<void> {
+        this.sessionRepository.update({ id, nextId, externalId })
    }
 }

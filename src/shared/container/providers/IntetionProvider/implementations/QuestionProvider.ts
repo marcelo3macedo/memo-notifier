@@ -11,13 +11,6 @@ import RemoveSessionAPIUseCases from '@modules/sessions/useCases/removeSessionAP
 
 class QuestionProvider implements IIntetionProvider {
     async process({ session, message }): Promise<IIterationDTO> {
-        if (!isValidUUID(message)) {
-            const invalid_message = Messenger.getValue('error.invalidMessage')
-            return {
-                messages: [ invalid_message ]
-            }
-        }
-
         return this.makeMessage({
             session,
             message
@@ -34,27 +27,48 @@ class QuestionProvider implements IIntetionProvider {
         const updateSessionCardUseCases = container.resolve(UpdateSessionCardUseCases)
         const difficulties = await listDifficultiesAPIUseCase.execute()     
         const nextIteration = this.getIterationByTypePosition(session.iterations, iteration.type, iteration.position)
+        const difficulty = difficulties.find(x=> x.id === message)
+
+        if (!difficulty) {
+            const difficultyNotFound = Messenger.getValue('error.difficultyNotFound')
+            return {
+                messages: [
+                    difficultyNotFound
+                ]
+            }
+        }
 
         await updateSessionCardUseCases.execute({ 
-            sessionsId: session.id,
+            sessionsId: session.externalId,
             cardsId: iteration.cardId,
-            difficultyId: message
+            difficultyId: difficulty.id
         })
         
         if (!nextIteration) {
             const removeSessionAPIUseCases = container.resolve(RemoveSessionAPIUseCases)
             const finishMessage = Messenger.getValue('session.completed')
             
-            await removeSessionAPIUseCases.execute({ id: session.id })
+            await removeSessionAPIUseCases.execute({ id: session.externalId })
             
             await SessionProcessor.updateOptions({ 
                 session, 
                 type: SESSIONTYPE_FINISHED, 
-                messages: finishMessage
+                messages: [ 
+                    { message: finishMessage  }
+                ]
             })
+
+            return {
+                messages: [
+                    finishMessage
+                ]
+            }
         }
 
-        const responseMessage = nextIteration.content.concat("\n", nextIteration.secretContent)
+        const responseMessage = nextIteration.secretContent ? 
+            nextIteration.content.concat("\n", nextIteration.secretContent) : 
+            nextIteration.content
+            
         const options = difficulties.map(d => {
             return {
                 slug: d.id,
@@ -81,7 +95,8 @@ class QuestionProvider implements IIntetionProvider {
     }
 
     getIterationByTypePosition(iterations, type, position) {
-        return iterations.find(x=> x.type === type && x.position === position++)
+        position = position + 1
+        return iterations.find(x=> x.type === type && x.position === position)
     }
 }
 

@@ -4,6 +4,7 @@ import CreateIterationOptionUseCases from "@modules/iterations/useCases/createIt
 import CreateSessionUseCases from "@modules/sessions/useCases/createSession/CreateSessionUseCases";
 import IndexSessionUseCases from "@modules/sessions/useCases/indexSession/IndexSessionUseCases";
 import RemoveSessionUseCases from "@modules/sessions/useCases/removeSession/RemoveSessionUseCases";
+import RemoveSessionAPIUseCases from "@modules/sessions/useCases/removeSessionAPI/RemoveSessionAPIUseCases";
 import UpdateSessionUseCases from "@modules/sessions/useCases/updateSession/UpdateSessionUseCases";
 import { container } from "tsyringe";
 
@@ -27,8 +28,14 @@ class SessionProcessor {
         let iteration;
         const createIterationUseCases = container.resolve(CreateIterationUseCases)
         const removeSessionUseCases = container.resolve(RemoveSessionUseCases)
+        const removeSessionAPIUseCases = container.resolve(RemoveSessionAPIUseCases)
         const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
         const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
+
+        if (type === SESSIONTYPE_FINISHED) {
+            await removeSessionAPIUseCases.execute({ id: session.externalId })
+            return removeSessionUseCases.execute({ id: session.id })
+        }
         
         await Promise.all(messages.map(async (m, i) => {
             iteration = await createIterationUseCases.execute({ 
@@ -48,19 +55,16 @@ class SessionProcessor {
                 position: i
             })
         })
-
-        if (type === SESSIONTYPE_FINISHED) {
-            await removeSessionUseCases.execute({ id: session.id })
-        } else {
-            await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })
-        }
+        
+        await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })
     }
 
-    static async updateOptions({ session, type, messages, options=[] }) {
+    static async updateOptions({ session, type, messages, options=[], externalId=null }) {
         let iteration, firstIteration;
         const createIterationUseCases = container.resolve(CreateIterationUseCases)
         const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
         const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
+        const removeSessionUseCases = container.resolve(RemoveSessionUseCases)
         
         await Promise.all(messages.map(async (m, i) => {
             iteration = await createIterationUseCases.execute({ 
@@ -83,7 +87,11 @@ class SessionProcessor {
             })
         }))
 
-        await updateSessionUseCases.execute({ id: session.id, nextId: firstIteration.id })
+        await updateSessionUseCases.execute({ id: session.id, nextId: firstIteration.id, externalId })
+
+        if (type === SESSIONTYPE_FINISHED) {
+            await removeSessionUseCases.execute({ id: session.id })
+        }
     }
 
     static async updateIteration({ session, iteration }) {

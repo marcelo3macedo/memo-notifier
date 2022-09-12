@@ -5,6 +5,7 @@ import { TelegramProvider } from "./ChannelProvider/implementations/TelegramProv
 
 import { IIntetionProvider } from "./IntetionProvider/IIntetionProvider";
 import { ExitProvider } from "./IntetionProvider/implementations/ExitProvider";
+import { FinishProvider } from "./IntetionProvider/implementations/FinishProvider";
 import { QuestionProvider } from "./IntetionProvider/implementations/QuestionProvider";
 import { QuestionWelcomeProvider } from "./IntetionProvider/implementations/QuestionWelcomeProvider";
 import { WelcomeProvider } from "./IntetionProvider/implementations/WelcomeProvider";
@@ -22,6 +23,11 @@ container.registerSingleton<IIntetionProvider>(
 container.registerSingleton<IIntetionProvider>(
     "ExitProvider",
     ExitProvider
+);
+
+container.registerSingleton<IIntetionProvider>(
+    "FinishProvider",
+    FinishProvider
 );
 
 container.registerSingleton<IIntetionProvider>(
