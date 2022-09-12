@@ -22,7 +22,8 @@ export default {
         },
         error: {
             invalidMessage: "Resposta inválida.",
-            sessionNotFound: "Sessão não encontrada"
+            sessionNotFound: "Sessão não encontrada",
+            difficultyNotFound: "Dificuldade não encontrada"
         }
     }
 };

@@ -6,7 +6,7 @@ class Messenger {
         if (!variables) {
           return value
         }
-        
+
         variables.forEach(v => {
             let re = new RegExp(`{{${v.key}}}`,"gi");
             value = value.replace(re, v.value) 

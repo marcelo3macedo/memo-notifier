@@ -23,7 +23,7 @@ class TelegramProvider implements IChannelProvider {
         if (!messages) {
             return
         }
-
+        
         const optRequest = {
             method: 'POST',
             url: helper.telegram.endpointWithToken,

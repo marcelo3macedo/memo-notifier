@@ -50,13 +50,14 @@ class QuestionWelcomeProvider implements IIntetionProvider {
             session, 
             type: SESSIONTYPE_QUESTION, 
             messages: messages,
-            options
+            options,
+            externalId: sessionAPI.id
         })
 
         return {
             options,
             messages: [
-                messages[0]
+                messages[0].message
             ]
         }
     }

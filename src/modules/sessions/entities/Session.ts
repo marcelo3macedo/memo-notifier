@@ -15,6 +15,9 @@ export class Session {
 
    @Column()
    nextId: string;
+
+   @Column()
+   externalId: string;
   
    @CreateDateColumn()
    createdAt: Date;
