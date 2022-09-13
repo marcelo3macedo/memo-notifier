@@ -5,8 +5,16 @@ import { IChannelProvider } from "../IChannelProvider";
 
 class TelegramProvider implements IChannelProvider {
     receive(data): IMessageDTO {
-        const { message } = data || {}
+        const { message, callback_query } = data || {}
         const { chat } = message || {}
+
+        if (callback_query) {
+            return {
+                messageId: callback_query.id,
+                content: callback_query.data,
+                userId: callback_query.message.chat.id
+            }
+        }
 
         if (!message || !chat) {
             return
