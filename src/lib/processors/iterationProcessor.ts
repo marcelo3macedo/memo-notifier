@@ -6,7 +6,7 @@ import SessionProcessor from "./sessionProcessor"
 import User from "./user"
 
 @injectable()
-class   IterationProcessor {
+class IterationProcessor {
     constructor(
         @inject("WelcomeProvider")
         private welcomeProvider: IIntetionProvider,

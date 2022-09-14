@@ -11,11 +11,10 @@ import messenger from "@constants/messenger";
 
 class WelcomeProvider implements IIntetionProvider {
     async process({ user, session }): Promise<IIterationDTO> {
-        const id = '074a1691-672c-41d9-a573-a518219ad159'
         const indexUserAPIUseCases = container.resolve(IndexUserAPIUseCases)
         const listSessionAPIUseCases = container.resolve(ListSessionAPIUseCases)
         const userAPI = await indexUserAPIUseCases.execute({
-            id
+            id: user.externalId
         })        
         const sessionsAPI = await listSessionAPIUseCases.execute({
             userId: userAPI.id
@@ -43,12 +42,13 @@ class WelcomeProvider implements IIntetionProvider {
             }
         }
 
+        let options = []
         if (sessionsAPI.length == 1) {
             const sessionMessage = Messenger.getValue('welcome.session_open', [ 
                 { key: 'user', value: user.name },
                 { key: 'sessionName', value: sessionsAPI[0].deck.name }
             ])
-            let options = [
+            options = [
                 { slug: sessionsAPI[0].id, content: messenger.default.options.yes },
                 { slug: ITERATION_MENU, content: messenger.default.options.no  }
             ]
@@ -66,23 +66,26 @@ class WelcomeProvider implements IIntetionProvider {
             }
         }
 
-        // if session = 1 -> message -> Sim/Não
-        // if session > 1 -> message -> Options
+        const sessionsMessage = Messenger.getValue('welcome.sessions_open', [ 
+            { key: 'user', value: user.name },
+            { key: 'sessionName', value: sessionsAPI[0].deck.name }
+        ])
 
-        //user.name
+        sessionsAPI.forEach(s => {
+            options.push({ slug: s.id, content: s.deck.name })
+        });
 
-        /*return [
-            {
-                messageId: 1,
-                userId,
-                content: "Olá Marcelo, segue suas sessões em aberto:"
-            },
-            {
-                messageId: 2,
-                userId,
-                content: "Qual delas você deseja verificar? 1- teste  2- teste  3 - teste"
-            }
-        ]*/
+        await SessionProcessor.update({ 
+            session, 
+            type: SESSIONTYPE_QUESTION_WELCOME, 
+            messages: [ sessionsMessage ],
+            options
+        })
+
+        return {
+            options,
+            messages: [ sessionsMessage ]
+        }
     }
 }
 

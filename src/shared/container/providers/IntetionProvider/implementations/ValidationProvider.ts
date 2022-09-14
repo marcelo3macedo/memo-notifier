@@ -43,7 +43,8 @@ class ValidationProvider implements IIntetionProvider {
         })
 
         return {
-            messages: [ userFound ]
+            messages: [ userFound ],
+            options
         }
     }
 }
