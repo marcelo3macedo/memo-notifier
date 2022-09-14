@@ -12,6 +12,10 @@ export class UserAPI {
    @Column()
    email: string;
 
+   @Column()
+   code: string;
+
+
    @CreateDateColumn()
    createdAt: Date;
 

@@ -6,11 +6,18 @@ export default {
             session_open: "Olá {{user}}, há a sessão {{sessionName}} disponível, deseja revisá-la?",
             options: "Qual delas você deseja verificar?"
         },
+        user: {
+            notFound: "Usuário não encontrado, verifique o código digitado.",
+            found: "Usuário encontrado, seja bem vindo ao MemoBot"
+        },
         session: {
             completed: "Parabéns! Você completou essa sessão com sucesso."
         },
         trigger: {
             exit: "Sua sessão foi encerrada.\nObrigado por utilizar o Memo."
+        },
+        auth: {
+            login: "Bem-vindo ao MemoBot, integre-se com a plataforma nos informando o código disponibilizado em:\nmemorizou.com.br/integracoes/telegram\n\nDigite o seu código de integração."
         },
         keywords: {
             menu: 'menu,menu principal,recomeçar,inicio',
