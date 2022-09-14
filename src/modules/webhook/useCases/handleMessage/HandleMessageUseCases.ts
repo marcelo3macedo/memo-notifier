@@ -17,7 +17,8 @@ export default class HandleMessageUseCases {
             await createMessageUseCases.execute({ message: content, userId })
 
             const { key, messages, options } = await iterationProcessor.handle({ channelType, userId, message: content })
-            channelProcessor.sendMessage({ channelType, key, messages, options })
+            console.log(messages)
+            //channelProcessor.sendMessage({ channelType, key, messages, options })
         } catch (e) {
             console.log(e)
         }
