@@ -25,6 +25,7 @@ export class CreateIteration1661512497347 implements MigrationInterface {
                 {
                     name: 'content',
                     type: 'varchar',
+                    length: '800',
                 },
                 {
                     name: 'position',

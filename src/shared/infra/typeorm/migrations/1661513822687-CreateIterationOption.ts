@@ -21,10 +21,12 @@ export class CreateIterationOption1661513822687 implements MigrationInterface {
                 {
                     name: 'slug',
                     type: 'varchar',
+                    length: '800',
                 },
                 {
                     name: 'content',
                     type: 'varchar',
+                    length: '800',
                 },
                 {
                     name: 'position',

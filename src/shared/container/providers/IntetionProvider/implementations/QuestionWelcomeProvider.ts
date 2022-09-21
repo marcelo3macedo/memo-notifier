@@ -1,16 +1,16 @@
 import { IIntetionProvider } from "../IIntetionProvider";
 import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
-import { validate as isValidUUID } from 'uuid';
 import Messenger from "@lib/messenger";
 import IndexSessionAPIUseCases from "@modules/sessions/useCases/indexSessionAPI/IndexSessionAPIUseCases";
 import { container } from "tsyringe";
 import SessionProcessor from "@lib/processors/sessionProcessor";
 import { SESSIONTYPE_QUESTION } from "@constants/sessionType";
 import { ListDifficultiesAPIUseCase } from "@modules/difficulties/useCases/listDifficultiesAPI/ListDifficultiesAPIUseCase";
+import Utils from "@lib/utils";
 
 class QuestionWelcomeProvider implements IIntetionProvider {
     async process({ user, session, message }): Promise<IIterationDTO> {
-        if (!isValidUUID(message)) {
+        if (!Utils.isUUID(message)) {
             const invalid_message = Messenger.getValue('error.invalidMessage')
             return {
                 messages: [ invalid_message ]

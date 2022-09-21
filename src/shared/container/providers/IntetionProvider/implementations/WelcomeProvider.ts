@@ -66,9 +66,10 @@ class WelcomeProvider implements IIntetionProvider {
             }
         }
 
+        const sessions = sessionsAPI.reduce((p, s) => p + s.deck.name + "\n", '')
         const sessionsMessage = Messenger.getValue('welcome.sessions_open', [ 
             { key: 'user', value: user.name },
-            { key: 'sessionName', value: sessionsAPI[0].deck.name }
+            { key: 'sessions', value: sessions }
         ])
 
         sessionsAPI.forEach(s => {
