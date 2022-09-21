@@ -8,18 +8,14 @@ import IterationProcessor from "@lib/processors/iterationProcessor";
 @injectable()
 export default class HandleMessageUseCases {
     async execute({ channelType, requestData }:IHandleMessageDTO): Promise<void> {
-        try {
-            const channelProcessor = container.resolve(ChannelProcessor)
-            const createMessageUseCases = container.resolve(CreateMessageUseCases)
-            const iterationProcessor = container.resolve(IterationProcessor)
+        const channelProcessor = container.resolve(ChannelProcessor)
+        const createMessageUseCases = container.resolve(CreateMessageUseCases)
+        const iterationProcessor = container.resolve(IterationProcessor)
 
-            const { content, userId } = channelProcessor.handleMessage({ channelType, requestData })
-            await createMessageUseCases.execute({ message: content, userId })
+        const { content, userId } = channelProcessor.handleMessage({ channelType, requestData })
+        await createMessageUseCases.execute({ message: content, userId })
 
-            const { key, messages, options } = await iterationProcessor.handle({ channelType, userId, message: content })
-            channelProcessor.sendMessage({ channelType, key, messages, options })
-        } catch (e) {
-            console.log(e)
-        }
+        const { key, messages, options } = await iterationProcessor.handle({ channelType, userId, message: content })
+        channelProcessor.sendMessage({ channelType, key, messages, options })
    }
 }
