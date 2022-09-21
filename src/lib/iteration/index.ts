@@ -21,11 +21,13 @@ class Iteration {
   }
 
   static reservedKeyword(message) {
-    if (messenger.default.keywords.menu.split(',').includes(message)) {
+    const preparedMessage = message.toLowerCase()
+
+    if (messenger.default.keywords.menu.split(',').includes(preparedMessage)) {
       return ITERATION_MENU
     }
 
-    if (messenger.default.keywords.sair.split(',').includes(message)) {
+    if (messenger.default.keywords.sair.split(',').includes(preparedMessage)) {
       return ITERATION_EXIT
     }
   }
