@@ -47,6 +47,7 @@
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2",
-    "winston": "^3.4.0"
+    "winston": "^3.4.0",
+    "winston-graylog2": "^2.1.2"
   }
 }
