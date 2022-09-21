@@ -24,7 +24,7 @@ class SessionProcessor {
         return createSessionUseCases.execute({ userId })
     }
 
-    static async update({ session, type, messages, options=[] }) {
+    static async update({ session, type, messages, options=[], updateApi=true }) {
         let iteration;
         const createIterationUseCases = container.resolve(CreateIterationUseCases)
         const removeSessionUseCases = container.resolve(RemoveSessionUseCases)
@@ -32,8 +32,11 @@ class SessionProcessor {
         const updateSessionUseCases = container.resolve(UpdateSessionUseCases)
         const createIterationOptionUseCases = container.resolve(CreateIterationOptionUseCases)
 
+        if (type === SESSIONTYPE_FINISHED && updateApi) {
+            await removeSessionAPIUseCases.execute({ id: session.externalId })            
+        }
+
         if (type === SESSIONTYPE_FINISHED) {
-            await removeSessionAPIUseCases.execute({ id: session.externalId })
             return removeSessionUseCases.execute({ id: session.id })
         }
         

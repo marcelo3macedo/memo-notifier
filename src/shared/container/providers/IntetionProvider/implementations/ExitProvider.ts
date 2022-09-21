@@ -16,7 +16,8 @@ class ExitProvider implements IIntetionProvider {
         await SessionProcessor.update({ 
             session, 
             type: SESSIONTYPE_FINISHED, 
-            messages: [ triggerExit ] 
+            messages: [ triggerExit ],
+            updateApi: false
         })
 
         return {
