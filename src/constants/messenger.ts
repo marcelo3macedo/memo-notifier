@@ -1,9 +1,9 @@
 export default {
     default: {
         welcome: {
-            no_session: "Olá {{user}}, nenhuma há sessão pendente para revisão.\n\nAcesse memorizou.com.br e crie/adicione uma nova sessão.",
-            sessions_open: "Olá {{user}}, existe as seguintes sessões em aberto:\n\n{{sessions}}\n\n Qual deseja revisar?",
-            session_open: "Olá {{user}}, há a sessão {{sessionName}} disponível, deseja revisá-la?",
+            no_session: "{{user}}, nenhuma há sessão pendente para revisão.\n\nAcesse memorizou.com.br e crie/adicione uma nova sessão.",
+            sessions_open: "{{user}}, existe as seguintes sessões em aberto:\n\n{{sessions}}\n\n Qual deseja revisar?",
+            session_open: "{{user}}, há a sessão {{sessionName}} disponível, deseja revisá-la?",
             options: "Qual delas você deseja verificar?"
         },
         user: {
@@ -11,7 +11,8 @@ export default {
             found: "Usuário encontrado, seja bem vindo ao MemoBot"
         },
         session: {
-            completed: "Parabéns! Você completou essa sessão com sucesso."
+            completed: "Parabéns! Você completou essa sessão com sucesso.",
+            init: "Iniciando a sessão {{sessionName}}."
         },
         trigger: {
             exit: "Sua sessão foi encerrada.\nObrigado por utilizar o Memo."

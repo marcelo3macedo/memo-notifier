@@ -45,6 +45,9 @@ class QuestionWelcomeProvider implements IIntetionProvider {
                 content: d.name
             }
         })
+        const sessionInit = Messenger.getValue('session.init', [ 
+            { key: 'sessionName', value: sessionAPI.deck.name }
+        ])
         
         await SessionProcessor.updateOptions({ 
             session, 
@@ -57,6 +60,7 @@ class QuestionWelcomeProvider implements IIntetionProvider {
         return {
             options,
             messages: [
+                sessionInit,
                 messages[0].message
             ]
         }
