@@ -7,7 +7,7 @@ export default {
             options: "Qual delas você deseja verificar?"
         },
         user: {
-            notFound: "Usuário não encontrado, verifique o código digitado.",
+            notFound: "Usuário não encontrado, ative seu usuário na plataforma Memorizou",
             found: "Usuário encontrado, seja bem vindo ao MemoBot"
         },
         session: {
@@ -18,7 +18,7 @@ export default {
             exit: "Sua sessão foi encerrada.\nObrigado por utilizar o Memo."
         },
         auth: {
-            login: "Bem-vindo ao MemoBot, integre-se com a plataforma nos informando o código disponibilizado em:\nmemorizou.com.br/integracoes/telegram\n\nDigite o seu código de integração."
+            login: "Bem-vindo ao MemoBot, integre-se com a plataforma através do link a seguir:\n\n<a href='{{link}}'>{{link}}</a>"
         },
         keywords: {
             menu: 'menu,menu principal,recomeçar,inicio',

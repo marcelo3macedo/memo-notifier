@@ -13,9 +13,10 @@ class UserRepository implements IUserRepository {
       this.repository = getRepository(User);
    }
 
-   async create({ key, channelType, externalId }:ICreateUserDTO): Promise<void> {
+   async create({ key, name, channelType, externalId }:ICreateUserDTO): Promise<void> {
       const user = this.repository.create({
          key,
+         name,
          channelType,
          externalId
       })

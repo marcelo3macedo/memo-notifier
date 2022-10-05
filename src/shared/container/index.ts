@@ -19,6 +19,10 @@ import { DifficultiesAPIRepository } from '@modules/difficulties/repositories/im
 import { IDifficultiesAPIRepository } from '@modules/difficulties/repositories/IDifficultiesAPIRepository';
 import { SessionCardAPIRepository } from '@modules/sessions/repositories/implementations/SessionCardAPIRepository';
 import ISessionCardAPIRepository from '@modules/sessions/repositories/ISessionCardAPIRepository';
+import IIntegrationAPIRepository from '@modules/integrations/repositories/IIntegrationAPIRepository';
+import IntegrationAPIRepository from '@modules/integrations/repositories/implementations/IntegrationAPIRepository';
+import IIntegrationTypeAPIRepository from '@modules/integrations/repositories/IIntegrationTypeAPIRepository';
+import IntegrationTypeAPIRepository from '@modules/integrations/repositories/implementations/IntegrationTypeAPIRepository';
 
 container.registerSingleton<IMessageRepository>('MessageRepository', MessageRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
@@ -29,3 +33,5 @@ container.registerSingleton<ISessionCardAPIRepository>('SessionCardAPIRepository
 container.registerSingleton<IIterationRepository>('IterationRepository', IterationRepository);
 container.registerSingleton<IIterationOptionRepository>('IterationOptionRepository', IterationOptionRepository);
 container.registerSingleton<IDifficultiesAPIRepository>('DifficultiesAPIRepository', DifficultiesAPIRepository);
+container.registerSingleton<IIntegrationAPIRepository>('IntegrationAPIRepository', IntegrationAPIRepository);
+container.registerSingleton<IIntegrationTypeAPIRepository>('IntegrationTypeAPIRepository', IntegrationTypeAPIRepository);

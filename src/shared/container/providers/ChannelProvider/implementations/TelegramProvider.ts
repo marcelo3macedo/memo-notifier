@@ -12,7 +12,8 @@ class TelegramProvider implements IChannelProvider {
             return {
                 messageId: callback_query.id,
                 content: callback_query.data,
-                userId: callback_query.message.chat.id
+                userId: callback_query.message.chat.id,
+                userName: ''
             }
         }
 
@@ -23,7 +24,8 @@ class TelegramProvider implements IChannelProvider {
         return {
             messageId: message.message_id,
             content: message.text,
-            userId: chat.id
+            userId: chat.id,
+            userName: chat.first_name
         }
     }
     

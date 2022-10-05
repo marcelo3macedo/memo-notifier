@@ -6,6 +6,6 @@ COPY . .
 
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 3001
 
 ENTRYPOINT [ "yarn", "dev" ]

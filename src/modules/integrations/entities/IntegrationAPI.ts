@@ -1,23 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 import { v4 as uuid } from "uuid";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
-@Entity()
-export class User {
+@Entity({ name: "integration" })
+export class IntegrationAPI {
    @PrimaryGeneratedColumn()
    id: string;
 
    @Column()
-   key: string;
-
-   @Column()
-   name: string;
-
-   @Column()
-   channelType: string;
+   typeId: string;
 
    @Column()
    externalId: string;
-  
+
+   @Column()
+   externalName: string;
+
    @CreateDateColumn()
    createdAt: Date;
 

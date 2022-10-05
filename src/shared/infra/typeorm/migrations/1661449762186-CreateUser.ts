@@ -18,6 +18,10 @@ export class CreateUser1661449762186 implements MigrationInterface {
                   type: 'varchar',
                 },
                 {
+                  name: 'name',
+                  type: 'varchar',
+                },
+                {
                   name: 'channelType',
                   type: 'varchar',
                 },

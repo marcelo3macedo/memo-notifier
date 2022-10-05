@@ -4,7 +4,7 @@ import CreateUserUseCases from "@modules/users/useCases/createUser/createUserUse
 import IndexUserUseCases from "@modules/users/useCases/indexUser/IndexUserUseCases"
 
 class User {
-    static async retrieve({ channelType, userId }) {
+    static async retrieve({ channelType, userId, userName }) {
         const indexUserUseCases = container.resolve(IndexUserUseCases)
         const createUserUseCases = container.resolve(CreateUserUseCases)
         
@@ -19,6 +19,7 @@ class User {
 
         await createUserUseCases.execute({
             key: userId,
+            name: userName,
             channelType
         })
 

@@ -24,8 +24,8 @@ class IterationProcessor {
         private validationProvider: IIntetionProvider,
     ) {}
 
-    async handle({ channelType, userId, message }) {
-        const user = await User.retrieve({ channelType, userId })
+    async handle({ channelType, userId, userName, message }) {
+        const user = await User.retrieve({ channelType, userId, userName })
         const session = await SessionProcessor.retrieve({ userId: user.id })
         const intetion = this.getIntetion({ session, message, user })        
         if (!intetion) {

@@ -3,7 +3,7 @@ import messenger from "@constants/messenger"
 class Messenger {
     static getValue(key, variables=null) {
         let value = this.getObjectProperty(messenger.default, key)
-        if (!variables) {
+        if (!variables || !value) {
           return value
         }
 

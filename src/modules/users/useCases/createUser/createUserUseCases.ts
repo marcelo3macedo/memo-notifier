@@ -10,9 +10,10 @@ export default class CreateUserUseCases {
         private userRepository: IUserRepository
     ) {}
 
-   async execute({ key, channelType, externalId }:ICreateUserDTO): Promise<void> {
+   async execute({ key, name, channelType, externalId }:ICreateUserDTO): Promise<void> {
        return this.userRepository.create({
             key,
+            name,
             channelType,
             externalId
        })
