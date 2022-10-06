@@ -30,6 +30,12 @@ class UserRepository implements IUserRepository {
          .getOne()
    }
 
+   async getById({ id }): Promise<User> {
+      return this.repository.createQueryBuilder('users')
+         .where({ id })
+         .getOne()
+   }
+
    async update({ id, key, channelType, externalId }:IUpdateUserDTO): Promise<void> {
       const user = {
          key,

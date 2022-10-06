@@ -4,7 +4,8 @@ export default {
             no_session: "{{user}}, nenhuma há sessão pendente para revisão.\n\nAcesse memorizou.com.br e crie/adicione uma nova sessão.",
             sessions_open: "{{user}}, existe as seguintes sessões em aberto:\n\n{{sessions}}\n\n Qual deseja revisar?",
             session_open: "{{user}}, há a sessão {{sessionName}} disponível, deseja revisá-la?",
-            options: "Qual delas você deseja verificar?"
+            options: "Qual delas você deseja verificar?",
+            verified: "Parabéns! Seu canal foi integrado com sucesso.\n\nAgora você pode iniciar a memorizar!"
         },
         user: {
             notFound: "Usuário não encontrado, ative seu usuário na plataforma Memorizou",
@@ -25,6 +26,7 @@ export default {
             sair: 'sair,encerrar,fechar'
         },
         options: {
+            init: "Iniciar",
             yes: "Sim",
             no: "Não"
         },
