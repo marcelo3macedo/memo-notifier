@@ -51,6 +51,7 @@ class IterationProcessor {
 
         switch (iteration) {
             case ITERATION_WELCOME: return this.welcomeProvider;
+            case ITERATION_AUTH_VALIDATION: return this.welcomeProvider;
             case ITERATION_QUESTION_WELCOME: return this.questionWelcomeProvider;
             case ITERATION_MENU: return this.welcomeProvider;
             case ITERATION_EXIT: return this.exitProvider;

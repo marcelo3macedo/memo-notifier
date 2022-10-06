@@ -19,7 +19,7 @@ export default {
             exit: "Sua sessão foi encerrada.\nObrigado por utilizar o Memo."
         },
         auth: {
-            login: "Bem-vindo ao MemoBot, integre-se com a plataforma através do link a seguir:\n\n<a href='{{link}}'>{{link}}</a>"
+            login: "Bem-vindo ao MemoBot, integre-se com a plataforma através do link a seguir:\n\n{{link}}"
         },
         keywords: {
             menu: 'menu,menu principal,recomeçar,inicio',
