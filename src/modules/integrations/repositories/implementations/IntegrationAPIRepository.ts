@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 
-import IIntegrationAPIRepository from "../IIntegrationAPIRepository";
+import IIntegrationAPIRepository from "@modules/integrations/repositories/IIntegrationAPIRepository";
 import { DATABASE_API } from "@constants/databases";
 import ICreateIntegrationAPIDTO from "@modules/integrations/dtos/ICreateIntegrationAPIDTO";
 import { IntegrationAPI } from "@modules/integrations/entities/IntegrationAPI";

@@ -8,7 +8,7 @@ export default {
             verified: "Parabéns! Seu canal foi integrado com sucesso.\n\nAgora você pode iniciar a memorizar!"
         },
         user: {
-            notFound: "Usuário não encontrado, ative seu usuário na plataforma Memorizou",
+            notFound: "Ative seu usuário na plataforma Memorizou, acesse o link:",
             found: "Usuário encontrado, seja bem vindo ao MemoBot"
         },
         session: {
@@ -19,7 +19,8 @@ export default {
             exit: "Sua sessão foi encerrada.\nObrigado por utilizar o Memo."
         },
         auth: {
-            login: "Bem-vindo ao MemoBot, integre-se com a plataforma através do link a seguir:\n\n{{link}}"
+            login: "Bem-vindo ao MemoBot, integre-se com a plataforma através do link abaixo:",
+            title: "Acessar Link"
         },
         keywords: {
             menu: 'menu,menu principal,recomeçar,inicio',

@@ -1,5 +1,5 @@
-import IIndexIntegrationTypeAPIDTO from "../dtos/IIndexIntegrationTypeAPIDTO";
-import { IntegrationTypeAPI } from "../entities/IntegrationTypeAPI";
+import IIndexIntegrationTypeAPIDTO from "@modules/integrations/dtos/IIndexIntegrationTypeAPIDTO";
+import { IntegrationTypeAPI } from "@modules/integrations/entities/IntegrationTypeAPI";
 
 export default interface IIntegrationTypeAPIRepository {
     index(data: IIndexIntegrationTypeAPIDTO): Promise<IntegrationTypeAPI>;

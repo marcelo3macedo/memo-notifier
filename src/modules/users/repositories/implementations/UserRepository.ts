@@ -21,17 +21,17 @@ class UserRepository implements IUserRepository {
          externalId
       })
 
-      this.repository.save(user)
+      await this.repository.save(user)
    }
 
    async index({ key, channelType }:IIndexUserDTO): Promise<User> {
-      return this.repository.createQueryBuilder('users')
+      return this.repository.createQueryBuilder()
          .where({ key, channelType })
          .getOne()
    }
 
    async getById({ id }): Promise<User> {
-      return this.repository.createQueryBuilder('users')
+      return this.repository.createQueryBuilder()
          .where({ id })
          .getOne()
    }

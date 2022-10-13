@@ -1,5 +1,5 @@
 import { container } from "tsyringe";
-import { IIntetionProvider } from "../IIntetionProvider";
+import { IIntetionProvider } from "@shared/container/providers/IntetionProvider/IIntetionProvider";
 import IndexUserAPIUseCases from "@modules/users/useCases/indexUserAPI/IndexUserAPIUseCases";
 import ListSessionAPIUseCases from "@modules/sessions/useCases/listSessionAPI/ListSessionAPIUseCases";
 import Messenger from "@lib/messenger";

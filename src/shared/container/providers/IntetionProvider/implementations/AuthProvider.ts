@@ -1,4 +1,4 @@
-import { IIntetionProvider } from "../IIntetionProvider";
+import { IIntetionProvider } from "@shared/container/providers/IntetionProvider/IIntetionProvider";
 import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
 import Messenger from "@lib/messenger";
 import SessionProcessor from "@lib/processors/sessionProcessor";
@@ -17,12 +17,12 @@ class AuthProvider implements IIntetionProvider {
     
     async makeMessage({ user, session }): Promise<IIterationDTO> {
         const recoverIntegrationUseCases = container.resolve(RecoverIntegrationUseCases)
-        const integration = await recoverIntegrationUseCases.execute({ type: CHANNEL_TELEGRAM, id: user.id, name: user.name })
+        const integration = await recoverIntegrationUseCases.execute({ type: CHANNEL_TELEGRAM, id: user.id, name: user.name })        
+        const authMessage = Messenger.getValue('auth.login')
+        const options = [
+            { url: `${integrate.endpoint}/${CHANNEL_TELEGRAM}/${integration.id}`, content: Messenger.getValue('auth.title') }
+        ]
         
-        const authMessage = Messenger.getValue('auth.login', [ 
-            { key: 'link', value: `${integrate.endpoint}/${CHANNEL_TELEGRAM}/${integration.id}` }
-        ])
-
         await SessionProcessor.update({ 
             session, 
             type: SESSIONTYPE_AUTH_VALIDATION, 
@@ -30,6 +30,7 @@ class AuthProvider implements IIntetionProvider {
         })
 
         return {
+            options,
             messages: [ authMessage ]
         }
     }

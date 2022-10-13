@@ -3,7 +3,7 @@ import { getRepository, Repository } from "typeorm";
 import { DATABASE_API } from "@constants/databases";
 import { SessionCardAPI } from "@modules/sessions/entities/SessionCardAPI";
 import IUpdateSessionCardAPIDTO from "@modules/sessions/dtos/IUpdateSessionCardAPIDTO";
-import ISessionCardAPIRepository from "../ISessionCardAPIRepository";
+import ISessionCardAPIRepository from "@modules/sessions/repositories/ISessionCardAPIRepository";
 
 export class SessionCardAPIRepository implements ISessionCardAPIRepository {
     private repository: Repository<SessionCardAPI>;

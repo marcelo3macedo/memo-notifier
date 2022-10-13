@@ -5,7 +5,7 @@ import express from 'express';
 import '@shared/infra/typeorm';
 import '@shared/container';
 import { router } from './routes';
-import { Queue } from '../queue';
+import { Queue } from '@shared/infra/queue';
 
 const app = express()
 

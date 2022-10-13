@@ -1,13 +1,12 @@
-import { validate as isValidUUID } from 'uuid';
-import { IIntetionProvider } from "../IIntetionProvider";
-import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
-import Messenger from '@lib/messenger';
 import { container } from 'tsyringe';
-import { ListDifficultiesAPIUseCase } from '@modules/difficulties/useCases/listDifficultiesAPI/ListDifficultiesAPIUseCase';
+import { IIntetionProvider } from "@shared/container/providers/IntetionProvider/IIntetionProvider";
 import { SESSIONTYPE_FINISHED } from '@constants/sessionType';
-import SessionProcessor from '@lib/processors/sessionProcessor';
+import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
+import { ListDifficultiesAPIUseCase } from '@modules/difficulties/useCases/listDifficultiesAPI/ListDifficultiesAPIUseCase';
 import UpdateSessionCardUseCases from '@modules/sessions/useCases/updateSessionCard/UpdateSessionCardUseCases';
 import RemoveSessionAPIUseCases from '@modules/sessions/useCases/removeSessionAPI/RemoveSessionAPIUseCases';
+import Messenger from '@lib/messenger';
+import SessionProcessor from '@lib/processors/sessionProcessor';
 
 class QuestionProvider implements IIntetionProvider {
     async process({ session, message }): Promise<IIterationDTO> {

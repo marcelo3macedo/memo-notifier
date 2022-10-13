@@ -1,4 +1,5 @@
 export default interface IIterationOptionDTO {
-    slug: string;
+    slug?: string;
+    url?: string;
     content: string;
  }

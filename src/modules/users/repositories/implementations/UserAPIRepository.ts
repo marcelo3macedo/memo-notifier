@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 
-import IUserAPIRepository from "../IUserAPIRepository";
+import IUserAPIRepository from "@modules/users/repositories/IUserAPIRepository";
 import { UserAPI } from "@modules/users/entities/UserAPI";
 import { DATABASE_API } from "@constants/databases";
 import IIndexUserAPIDTO from "@modules/users/dtos/IIndexUserAPIDTO";

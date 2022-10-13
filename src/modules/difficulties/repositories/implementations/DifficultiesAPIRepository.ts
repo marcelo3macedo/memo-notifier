@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { DATABASE_API } from '@constants/databases';
-import { IDifficultiesAPIRepository } from '../IDifficultiesAPIRepository';
+import { IDifficultiesAPIRepository } from '@modules/difficulties/repositories/IDifficultiesAPIRepository';
 import DifficultyAPI from '@modules/difficulties/entities/DifficultyAPI';
 
 export class DifficultiesAPIRepository implements IDifficultiesAPIRepository {

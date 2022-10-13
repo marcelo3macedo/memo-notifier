@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import IIterationOptionRepository from "../IIterationOptionRepository";
+import IIterationOptionRepository from "@modules/iterations/repositories/IIterationOptionRepository";
 import ICreateIterationOptionDTO from "@modules/iterations/dtos/ICreateIterationOptionDTO";
 import { IterationOption } from "@modules/iterations/entities/IterationOption";
 

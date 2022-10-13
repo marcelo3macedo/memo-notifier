@@ -8,6 +8,7 @@
     "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "node dist/shared/infra/http/server.js",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli"
   },
   "keywords": [],
@@ -45,7 +46,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.1.8",
     "tsyringe": "^4.6.0",
-    "typeorm": "^0.2.41",
+    "typeorm": "^0.3.10",
     "uuid": "^8.3.2",
     "winston": "^3.4.0",
     "winston-graylog2": "^2.1.2"

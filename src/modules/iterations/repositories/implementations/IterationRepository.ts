@@ -1,6 +1,6 @@
 import { Iteration } from "@modules/iterations/entities/Iteration";
 import { getRepository, Repository } from "typeorm";
-import IIterationRepository from "../IIterationRepository";
+import IIterationRepository from "@modules/iterations/repositories/IIterationRepository";
 import ICreateIterationDTO from "@modules/iterations/dtos/ICreateIterationDTO";
 
 export class IterationRepository implements IIterationRepository {

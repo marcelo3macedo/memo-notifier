@@ -1,7 +1,7 @@
 import helper from "@config/helper";
 import IMessageDTO from "@modules/messages/dtos/IMessageDTO";
 import axios from "axios";
-import { IChannelProvider } from "../IChannelProvider";
+import { IChannelProvider } from "@shared/container/providers/ChannelProvider/IChannelProvider";
 
 class TelegramProvider implements IChannelProvider {
     receive(data): IMessageDTO {
@@ -62,7 +62,8 @@ class TelegramProvider implements IChannelProvider {
         const result = options.map(o => {
             return {
                 text: o.content,
-                callback_data: o.slug
+                callback_data: o.slug,
+                url: o.url
             }
         })
 

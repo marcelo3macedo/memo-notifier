@@ -1,4 +1,4 @@
-import { IIntetionProvider } from "../IIntetionProvider";
+import { IIntetionProvider } from "@shared/container/providers/IntetionProvider/IIntetionProvider";
 import IIterationDTO from "@modules/iterations/dtos/IIterationDTO";
 import Messenger from "@lib/messenger";
 import IndexSessionAPIUseCases from "@modules/sessions/useCases/indexSessionAPI/IndexSessionAPIUseCases";

@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 
 import { DATABASE_API } from "@constants/databases";
-import IIntegrationTypeAPIRepository from "../IIntegrationTypeAPIRepository";
+import IIntegrationTypeAPIRepository from "@modules/integrations/repositories/IIntegrationTypeAPIRepository";
 import IIndexIntegrationTypeAPIDTO from "@modules/integrations/dtos/IIndexIntegrationTypeAPIDTO";
 import { IntegrationTypeAPI } from "@modules/integrations/entities/IntegrationTypeAPI";
 
