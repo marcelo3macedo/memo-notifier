@@ -1,5 +1,7 @@
+import { Repository } from "typeorm";
+import { AppDataSource } from "@shared/infra/typeorm";
+
 import { Iteration } from "@modules/iterations/entities/Iteration";
-import { getRepository, Repository } from "typeorm";
 import IIterationRepository from "@modules/iterations/repositories/IIterationRepository";
 import ICreateIterationDTO from "@modules/iterations/dtos/ICreateIterationDTO";
 
@@ -7,7 +9,7 @@ export class IterationRepository implements IIterationRepository {
     private repository: Repository<Iteration>;
 
     constructor() {
-        this.repository = getRepository(Iteration);
+        this.repository = AppDataSource.getRepository(Iteration);
     }
 
     async create({ sessionId, cardId, content, position, type }:ICreateIterationDTO): Promise<Iteration> {

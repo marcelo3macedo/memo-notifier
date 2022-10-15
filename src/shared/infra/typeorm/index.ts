@@ -26,3 +26,8 @@ const ApiDataSource = new DataSource({
 
 AppDataSource.initialize()
 ApiDataSource.initialize()
+
+export {
+    ApiDataSource,
+    AppDataSource
+}

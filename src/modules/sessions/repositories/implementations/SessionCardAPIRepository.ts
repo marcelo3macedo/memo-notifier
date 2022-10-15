@@ -1,6 +1,6 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { ApiDataSource } from "@shared/infra/typeorm";
 
-import { DATABASE_API } from "@constants/databases";
 import { SessionCardAPI } from "@modules/sessions/entities/SessionCardAPI";
 import IUpdateSessionCardAPIDTO from "@modules/sessions/dtos/IUpdateSessionCardAPIDTO";
 import ISessionCardAPIRepository from "@modules/sessions/repositories/ISessionCardAPIRepository";
@@ -9,7 +9,7 @@ export class SessionCardAPIRepository implements ISessionCardAPIRepository {
     private repository: Repository<SessionCardAPI>;
 
     constructor() {
-        this.repository = getRepository(SessionCardAPI, DATABASE_API);
+        this.repository = ApiDataSource.getRepository(SessionCardAPI);
     }
 
     async update({ sessionsId, cardsId, difficultyId }:IUpdateSessionCardAPIDTO): Promise<void> {

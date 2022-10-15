@@ -1,8 +1,8 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { ApiDataSource } from "@shared/infra/typeorm";
 
 import IUserAPIRepository from "@modules/users/repositories/IUserAPIRepository";
 import { UserAPI } from "@modules/users/entities/UserAPI";
-import { DATABASE_API } from "@constants/databases";
 import IIndexUserAPIDTO from "@modules/users/dtos/IIndexUserAPIDTO";
 import ISearchUserAPIDTO from "@modules/users/dtos/ISearchUserAPIDTO";
 
@@ -10,7 +10,7 @@ class UserAPIRepository implements IUserAPIRepository {
    private repository: Repository<UserAPI>;
 
    constructor() {
-      this.repository = getRepository(UserAPI, DATABASE_API);
+      this.repository = ApiDataSource.getRepository(UserAPI);
    }
 
    async index({ id }:IIndexUserAPIDTO): Promise<UserAPI> {

@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { AppDataSource } from "@shared/infra/typeorm";
 
 import IUserRepository from "@modules/users/repositories/IUserRepository";
 import { User } from "@modules/users/entities/User";
@@ -10,7 +11,7 @@ class UserRepository implements IUserRepository {
    private repository: Repository<User>;
 
    constructor() {
-      this.repository = getRepository(User);
+      this.repository = AppDataSource.getRepository(User);
    }
 
    async create({ key, name, channelType, externalId }:ICreateUserDTO): Promise<void> {

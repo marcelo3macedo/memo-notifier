@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { AppDataSource } from "@shared/infra/typeorm";
 
 import ICreateMessageDTO from "@modules/messages/dtos/ICreateMessageDTO";
 import { Message } from "@modules/messages/entities/Message";
@@ -8,7 +9,7 @@ class MessageRepository implements IMessageRepository {
     private repository: Repository<Message>;
 
    constructor() {
-      this.repository = getRepository(Message);
+      this.repository = AppDataSource.getRepository(Message);
    }
 
    async create({ message, userId }:ICreateMessageDTO): Promise<void> {

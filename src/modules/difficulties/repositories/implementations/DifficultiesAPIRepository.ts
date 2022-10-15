@@ -1,6 +1,6 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
+import { ApiDataSource } from '@shared/infra/typeorm';
 
-import { DATABASE_API } from '@constants/databases';
 import { IDifficultiesAPIRepository } from '@modules/difficulties/repositories/IDifficultiesAPIRepository';
 import DifficultyAPI from '@modules/difficulties/entities/DifficultyAPI';
 
@@ -8,7 +8,7 @@ export class DifficultiesAPIRepository implements IDifficultiesAPIRepository {
   private repository: Repository<DifficultyAPI>;
 
   constructor() {
-    this.repository = getRepository(DifficultyAPI, DATABASE_API);
+    this.repository = ApiDataSource.getRepository(DifficultyAPI);
   }
 
   async all(): Promise<DifficultyAPI[]> {

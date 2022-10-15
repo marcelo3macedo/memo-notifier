@@ -1,6 +1,4 @@
-import VariableManager from "@lib/VariableManager"
-
-VariableManager.load()
+import "@lib/VariableManager";
 
 export default {
     notifier_name: process.env.NOTIFIER_NAME,

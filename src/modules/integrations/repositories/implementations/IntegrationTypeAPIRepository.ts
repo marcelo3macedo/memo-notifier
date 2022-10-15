@@ -1,6 +1,6 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { ApiDataSource } from "@shared/infra/typeorm";
 
-import { DATABASE_API } from "@constants/databases";
 import IIntegrationTypeAPIRepository from "@modules/integrations/repositories/IIntegrationTypeAPIRepository";
 import IIndexIntegrationTypeAPIDTO from "@modules/integrations/dtos/IIndexIntegrationTypeAPIDTO";
 import { IntegrationTypeAPI } from "@modules/integrations/entities/IntegrationTypeAPI";
@@ -9,7 +9,7 @@ class IntegrationTypeAPIRepository implements IIntegrationTypeAPIRepository {
    private repository: Repository<IntegrationTypeAPI>;
 
    constructor() {
-      this.repository = getRepository(IntegrationTypeAPI, DATABASE_API);
+      this.repository = ApiDataSource.getRepository(IntegrationTypeAPI);
    }
 
    async index({ name }:IIndexIntegrationTypeAPIDTO): Promise<IntegrationTypeAPI> {
