@@ -44,7 +44,7 @@ class TelegramProvider implements IChannelProvider {
                 reply_markup: this.formatOptions(options)
             }
         }
-
+        
         await axios.request(optRequest)
     }
 
@@ -55,11 +55,23 @@ class TelegramProvider implements IChannelProvider {
     }
 
     formatOptions(options) {
+        let isArray = false
         if (!options) {
             return
         }
         
         const result = options.map(o => {
+            if (Array.isArray(o)) {
+                isArray = true
+                return o.map(oa => {
+                    return {
+                        text: oa.content,
+                        callback_data: oa.slug,
+                        url: oa.url
+                    }
+                })
+            }
+
             return {
                 text: o.content,
                 callback_data: o.slug,
@@ -68,9 +80,7 @@ class TelegramProvider implements IChannelProvider {
         })
 
         return {
-            inline_keyboard: [
-                result
-            ]
+            inline_keyboard: isArray ? result :  [ result ]
         }
     }
 }

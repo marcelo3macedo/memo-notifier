@@ -51,12 +51,14 @@ class SessionProcessor {
         }))
 
         options.forEach(async (o, i) => {
-            await createIterationOptionUseCases.execute({
-                content: o.content,
-                slug: o.slug,
-                iterationId: iteration.id,
-                position: i
-            })
+            if (!Array.isArray(o)) {
+                await createIterationOptionUseCases.execute({
+                    content: o.content,
+                    slug: o.slug,
+                    iterationId: iteration.id,
+                    position: i
+                })
+            }
         })
         
         await updateSessionUseCases.execute({ id: session.id, nextId: iteration.id })

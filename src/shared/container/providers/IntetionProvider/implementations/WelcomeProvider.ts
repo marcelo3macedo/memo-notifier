@@ -73,7 +73,7 @@ class WelcomeProvider implements IIntetionProvider {
         ])
 
         sessionsAPI.forEach(s => {
-            options.push({ slug: s.id, content: s.deck.name })
+            options.push([ { slug: s.id, content: s.deck.name } ])
         });
 
         await SessionProcessor.update({ 
