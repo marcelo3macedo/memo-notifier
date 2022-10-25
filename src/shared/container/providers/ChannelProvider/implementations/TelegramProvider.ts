@@ -60,6 +60,16 @@ class TelegramProvider implements IChannelProvider {
         }
         
         const result = options.map(o => {
+            if (Array.isArray(o)) {
+                return o.map(oa => {
+                    return {
+                        text: oa.content,
+                        callback_data: oa.slug,
+                        url: oa.url
+                    }
+                })
+            }
+
             return {
                 text: o.content,
                 callback_data: o.slug,
